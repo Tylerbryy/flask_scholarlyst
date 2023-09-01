@@ -1,0 +1,3 @@
+npx postcss Scholarlyst_flask/static/styles.css -o output.css
+
+npx postcss Scholarlyst_flask/static/styles.css -o Scholarlyst_flask\static\output.css

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Scholarlyst</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='output.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <style>
+
+
+        </style>
+    </head>
+    
+    <body>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Your Logo">
+        </div>
+
+        <div id="main">
+            <div class="container">
+                <div class="box">
+                    <div class="upper" id="upperid">
+                    </div>
+
+                    <div class="bottom">
+                         <form id="userinputform">
+                            <label for="chat" class="sr-only">Your message</label>
+                            <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+
+                                <button onclick="resetChat()" style="margin-right: 10px;" class="bg-red-200 hover:bg-red-300 text-red-800 font-semibold py-2 px-4 border border-red-400 rounded shadow">
+                                    Reset Chat
+                                </button>
+
+                                <input type="text" id="userinput"
+                                    class="py-3 px-5 block w-full border-gray-200 rounded-full text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                                    placeholder="Your message..." required>
+                                <button type="submit"
+                                    class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
+                                    id="sendbtn">
+                                    <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z">
+                                        </path>
+                                    </svg>
+                                    <span class="sr-only">Send message</span>
+                                </button>
+                            </div>
+                        </form>
+                  
+                        <span class="downwarning">Remember Your Chat will not be saved, it will be lost upon reloading.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mySidebar" class="sidebar transition-all duration-300 shadow-lg overflow-auto bg-gray-800 text-white">
+            <a href="javascript:void(0)" class="closebtn text-2xl" onclick="closeNav()">×</a>
+            <!-- Add your sidebar content here -->
+            <form id="sidebarform" class="flex flex-col p-10 rounded-lg">
+                <label for="model" class="font-bold text-lg mb-2">Model:</label>
+                <select id="model" name="model" class="m-2 p-2 rounded-lg transition-all duration-300 bg-gray-700 text-white">
+                    <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                    <option value="gpt-4">gpt-4</option>
+                </select>
+
+                <label for="word_limit" class="font-bold text-lg mb-2">Word Limit:</label>
+                <input type="number" id="word_limit" name="word_limit" min="1" max="1000" value= "1000" class="m-2 p-2 rounded-lg transition-all duration-300 bg-gray-700 text-white">
+
+                <label for="temperature" class="font-bold text-lg mb-2">Temperature:</label>
+                <input type="range" min="0" max="2" step="0.01" value="1" class="range range-sm" id="temperature" name="temperature" oninput="this.nextElementSibling.value = this.value" class="m-2 p-2 rounded-lg transition-all duration-300 bg-gray-700 text-white">
+                <output class="text-white">1</output>
+
+                <label for="prompt" class="font-bold text-lg mb-2">Prompt:</label>
+                <select id="prompt" class="m-2 p-2 rounded-lg transition-all duration-300 bg-gray-700 text-white">
+                    {% for key in prompts.keys() %}
+                        <option value="{{key}}">{{key}}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+
+        <button class="openbtn" onclick="toggleNav()" style="position: absolute; top: 10px; right: 10px;">☰</button>  
+
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+
+</html>

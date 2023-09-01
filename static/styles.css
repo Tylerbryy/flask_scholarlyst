@@ -1,0 +1,261 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+body {
+    font-family: 'Roboto', sans-serif; /* Changed font to Roboto for a modern look */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 100%;
+    max-height: 75vh; /* Add this line */
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    top: 20px;
+    left: 0;
+    transform: none;
+    resize: none;
+    overflow: auto;
+}
+
+        /* This applies to the box element */
+.box::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+    border-radius: 10px;
+}
+
+/* Track or progress bar */
+.box::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+    border-radius: 10px; /* Make the track edges round */
+}
+
+/* Handle or the draggable scrolling element */
+.box::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the handle */
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.box::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the handle when hovered */
+}
+
+@media screen and (min-width: 768px) {
+    .box {
+        max-width: 1200px; /* Set a maximum width for larger screens */
+        position: absolute; /* Positioning can be absolute on larger screens */
+        top: calc(50%); /* Adjusted to position the box below the nav bar */
+        left: 50%;
+        transform: translate(-50%, -50%); /* Added to center the box vertically and horizontally */
+    }
+}
+
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background-color: #333; /* Changed color to a darker shade for better contrast */
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2); /* Added shadow for a 3D effect */
+    z-index: 2; /* Added z-index to ensure sidebar appears above other content */
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px; /* Reduced font size for a cleaner look */
+    color: #ddd; /* Changed color to a lighter shade for better readability */
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+    background-color: #555; /* Added hover effect for better interactivity */
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: #ddd; /* Changed color to match the sidebar links */
+}
+
+/* Added media query for mobile compatibility */
+@media screen and (max-width: 600px) {
+    .sidebar {
+        width: 100%; /* Full width on small screens */
+    }
+    .sidebar a {
+        text-align: center; /* Centered text on small screens */
+        float: none; /* Avoid floating on small screens */
+    }
+    .sidebar .closebtn {
+        right: 10px; /* Adjust close button on small screens */
+    }
+}
+
+.openbtn {
+    align-items: center;
+    background-color: #b72d58;
+    border: 2px solid #111;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #111;
+    cursor: pointer;
+    display: flex;
+    font-family: Inter,sans-serif;
+    font-size: 16px;
+    height: 48px;
+    justify-content: center;
+    line-height: 24px;
+    max-width: 100%;
+    padding: 0 25px;
+    position: absolute; /* Changed from relative to absolute for positioning */
+    right: 23px; /* Added to move the button to the right and add some padding from the edge */
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+
+.openbtn:after {
+    background-color: #111;
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 48px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    transform: translate(8px, 8px);
+    transition: transform .2s ease-out;
+    z-index: -1;
+}
+
+.openbtn:hover:after {
+    transform: translate(0, 0);
+}
+
+.openbtn:active {
+    background-color: #ffdeda;
+    outline: 0;
+}
+
+.openbtn:hover {
+    outline: 0;
+}
+
+@media (min-width: 768px) {
+    .openbtn {
+        padding: 0 40px;
+    }
+}
+
+.openbtn:hover {
+    background-color: #ecabbd;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+.message {
+    margin: 20px;
+}
+
+.usermessagediv {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-left: 20%;
+}
+
+.usermessage {
+    background-color: #097df1;
+    color: #fff;
+    padding: 0.5rem .875rem;
+    border-radius: 20px;
+}
+
+.appmessagediv {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-right: 20%;
+}
+
+.appmessage {
+    background-color: #e5e5ea;
+    color: #000;
+    padding: 0.5rem .875rem;
+    border-radius: 20px;
+}
+
+.upper {
+    max-height: 100%;
+    padding-top: 40px;
+    padding-bottom: 170px;
+    overflow: auto;
+}
+
+.upper::-webkit-scrollbar {
+    width: 0 !important
+}
+
+#sendbtn:disabled {
+    opacity: 0.6;
+}
+
+.downwarning {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    font-size: 90%;
+    color: gray;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    position: relative; /* Added to position the logo relative to its container */
+}
+
+.logo-container img {
+    max-width: 50%; /* Reduce the logo size */
+    height: auto; /* Adjust as needed */
+    position: absolute; /* Position the logo absolutely within its container */
+    top: 100%; /* Lower the logo a bit */
+    left: 50%; /* Center the logo horizontally */
+    transform: translate(-50%, -50%); /* Offset the logo's position by half its width and height to ensure it's centered */
+}
