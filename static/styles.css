@@ -18,10 +18,9 @@ body {
 }
 
 .box {
-    background-color: #fff;
+    background-color: #f4f4f4; /* Changed box color to match body background */
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
     width: 100%;
     max-width: 100%;
     max-height: 75vh; /* Add this line */
@@ -49,13 +48,13 @@ body {
 
 /* Handle or the draggable scrolling element */
 .box::-webkit-scrollbar-thumb {
-    background: #888; /* Color of the handle */
+    background: #eaacbd; /* Color of the handle */
     border-radius: 10px;
 }
 
 /* Handle on hover */
 .box::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Color of the handle when hovered */
+    background: #b72d58; /* Color of the handle when hovered */
 }
 
 @media screen and (min-width: 768px) {
@@ -201,7 +200,7 @@ body {
 }
 
 .usermessage {
-    background-color: #097df1;
+    background-color: #b72d58;
     color: #fff;
     padding: 0.5rem .875rem;
     border-radius: 20px;

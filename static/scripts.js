@@ -16,16 +16,32 @@ function resetChat() {
         if (data.response) {
             // Clear the chat in the UI
             let upperdiv = document.getElementById('upperid');
-            upperdiv.innerHTML = '';
+            upperdiv.innerHTML = ''; // Clear the chat if needed
+
+            // Append the greeting message
+            const greetingDiv = document.createElement('div');
+            greetingDiv.className = "message";
+            greetingDiv.innerHTML = `
+                <div class="appmessagediv">
+                    <div class="appmessage">
+                        Hello, I'm here to help you write a winning scholarship essay. I will be guiding you through the process of crafting a compelling essay that will impress the scholarship committee. Are you ready to get started?
+                    </div>
+                </div>
+            `;
+            upperdiv.appendChild(greetingDiv);
         }
     });
 }
+
+window.addEventListener('load', resetChat);
+
+
 
 function openNav() {
     document.getElementById("mySidebar").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
 }
-    
+
 function closeNav() {
     document.getElementById("mySidebar").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
@@ -71,7 +87,7 @@ scrollToBottom()
 document.getElementById('userinput').value = ""
 document.getElementById('userinput').placeholder = "Wait . . ."
 
-const response = await fetch("http://127.0.0.1:5000/data", {
+const response = await fetch("https://tylerg.pythonanywhere.com/data", {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
@@ -92,7 +108,7 @@ if (json.response) {
     upperdiv.innerHTML = upperdiv.innerHTML + `<div class="message">
     <div class="appmessagediv">
         <div class="appmessage" id="temp">
-            
+
         </div>
     </div>
 </div>`
@@ -132,20 +148,20 @@ else {
 scrollToBottom()
 
 
-} 
+}
 
 window.onload = function() {
-fetch('http://127.0.0.1:5000/set_prompt', {
+fetch('https://tylerg.pythonanywhere.com/set_prompt', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ prompt: 'standard_essay' })  
+    body: JSON.stringify({ prompt: 'standard_essay' })
 });
 };
 
 document.getElementById('model').addEventListener('change', function() {
-fetch('http://127.0.0.1:5000/set_model', {
+fetch('https://tylerg.pythonanywhere.com/set_model', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
@@ -155,7 +171,7 @@ fetch('http://127.0.0.1:5000/set_model', {
 });
 
 document.getElementById('word_limit').addEventListener('change', function() {
-fetch('http://127.0.0.1:5000/set_word_limit', {
+fetch('https://tylerg.pythonanywhere.com/set_word_limit', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
@@ -165,7 +181,7 @@ fetch('http://127.0.0.1:5000/set_word_limit', {
 });
 
 document.getElementById('temperature').addEventListener('change', function() {
-fetch('http://127.0.0.1:5000/set_temperature', {
+fetch('https://tylerg.pythonanywhere.com/set_temperature', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
@@ -175,7 +191,7 @@ fetch('http://127.0.0.1:5000/set_temperature', {
 });
 
 document.getElementById('prompt').addEventListener('change', function() {
-fetch('http://127.0.0.1:5000/set_prompt', {
+fetch('https://tylerg.pythonanywhere.com/set_prompt', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',

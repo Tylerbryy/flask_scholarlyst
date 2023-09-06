@@ -8,13 +8,18 @@ from prompts import prompts
 
 app = Flask(__name__)
 app.secret_key = 'puddin10'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' 
+SQLALCHEMY_DATABASE_URI = "sqlite:///test.db"  # Use SQLite for a test database
+app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 CORS(app)
 
-load_dotenv()
-API = os.environ['OPENAI_API_KEY']
+load_dotenv(override=True)
+API = os.getenv('OPENAI_API_KEY')
+
 openai.api_key = API
+
 
 standards = list(prompts.keys())
 models = ["gpt-3.5-turbo", "gpt-4"]
@@ -36,6 +41,10 @@ g = LocalProxy(lambda: global_dict)
 
 @app.route('/')
 def index():
+    g['messages'] = [
+        {"role": "assistant", "content": "Hello, I'm here to help you write a winning scholarship essay. I will be guiding you through the process of crafting a compelling essay that will impress the scholarship committee. Are you ready to get started?"}
+    ]
+    
     return render_template('index.html', standards=standards, models=models,prompts=prompts)
 
 @app.route('/set_prompt', methods=['POST'])
@@ -94,9 +103,10 @@ def get_data():
         messages.append({"role": "assistant", "content": model_reply})
         g['messages'] = messages  # save messages back to g
 
+
         # Save data to the database
         data = Data(
-                prompt=prompt_key, 
+                prompt=prompt_key,
                 model=g.get('model', 'default_model'),  # provide a default value
                 word_limit=g.get('word_limit', 1000),  # provide a default value
                 temperature=g.get('temperature', 0.7)  # provide a default value
@@ -108,8 +118,7 @@ def get_data():
     except Exception as e:
         error_message = f'Error: {str(e)}'
         return jsonify({"message":error_message,"response":False})
-    
-    
+
 @app.route('/reset_chat', methods=['POST'])
 def reset_chat():
     g.pop('messages', None)
@@ -118,4 +127,4 @@ def reset_chat():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Create the tables
-    app.run(debug=True)
+    app.run()
